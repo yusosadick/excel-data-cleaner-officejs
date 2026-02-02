@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" 
+           xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" 
+           xsi:type="TaskPaneApp">
+  
+  <!-- Begin Basic Settings: Add-in metadata, used for all versions of Office unless override provided. -->
+  <!-- Note: Generate a unique GUID for production use. This is a placeholder ID. -->
+  <Id>12345678-1234-1234-1234-123456789012</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Excel Data Cleaner</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  
+  <!-- The display name of your add-in. Used on the store and various places of the Office UI. -->
+  <DisplayName DefaultValue="Excel Data Cleaner" />
+  <Description DefaultValue="Clean and standardize messy spreadsheet data with professional data cleaning tools and optional AI-powered insights." />
+  
+  <!-- Icon for your add-in. Used on installation screens and the add-ins dialog. -->
+  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-64.png" />
+  <!-- Support URL: Update with your actual support URL before publishing -->
+  <SupportUrl DefaultValue="https://www.contoso.com/help" />
+  
+  <!-- Domains that will be allowed when navigating. For example, if you use ShowTaskpane and have an "href" attribute, 
+       you must add the domain to the AppDomains section. -->
+  <AppDomains>
+    <AppDomain>https://localhost:3000</AppDomain>
+  </AppDomains>
+  
+  <!-- Begin TaskPane Mode integration. This section is used if there are no VersionOverrides or if the Office version does not support add-in commands. -->
+  <Hosts>
+    <Host Name="Workbook" />
+  </Hosts>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://localhost:3000/src/taskpane/taskpane.html" />
+  </DefaultSettings>
+  
+  <!-- Permissions: ReadWriteDocument is required for writing to the document. -->
+  <Permissions>ReadWriteDocument</Permissions>
+  
+  <!-- Begin Add-in Commands Mode integration. -->
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <!-- The Hosts node is required. -->
+    <Hosts>
+      <!-- Each host can have as many host-specific integrations as needed. -->
+      <Host xsi:type="Workbook">
+        <!-- Form factor. Currently only DesktopFormFactor is supported. -->
+        <DesktopFormFactor>
+          <!-- "FunctionFile" is the name of a JavaScript file that includes all the functions 
+               that will be called by the add-in commands. -->
+          <FunctionFile resid="Commands.Url" />
+          
+          <!-- PrimaryCommandSurface is the main Office Ribbon. -->
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <OfficeTab id="TabHome">
+              <Group id="CommandsGroup">
+                <Label resid="CommandsGroup.Label" />
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16"/>
+                  <bt:Image size="32" resid="Icon.32x32"/>
+                  <bt:Image size="80" resid="Icon.80x80"/>
+                </Icon>
+                
+                <!-- Control for the add-in command. -->
+                <Control xsi:type="Button" id="TaskpaneButton">
+                  <Label resid="TaskpaneButton.Label" />
+                  <Supertip>
+                    <Title resid="TaskpaneButton.Label" />
+                    <Description resid="TaskpaneButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16"/>
+                    <bt:Image size="32" resid="Icon.32x32"/>
+                    <bt:Image size="80" resid="Icon.80x80"/>
+                  </Icon>
+                  
+                  <!-- This is what happens when the command is triggered (E.g. click on the Ribbon). 
+                       Supported actions are ExecuteFunction or ShowTaskpane. -->
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>ButtonId1</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url" />
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    
+    <!-- You can use resources across hosts and form factors. -->
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812" />
+        <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/src/commands/commands.js" />
+        <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/src/taskpane/taskpane.html" />
+      </bt:Urls>
+      <!-- ShortStrings max characters==125. -->
+      <bt:ShortStrings>
+        <!-- GetStarted strings are not used in this add-in but required by manifest schema -->
+        <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!" />
+        <bt:String id="CommandsGroup.Label" DefaultValue="Data Cleaner" />
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Open Data Cleaner" />
+      </bt:ShortStrings>
+      <!-- LongStrings max characters==250. -->
+      <bt:LongStrings>
+        <!-- GetStarted strings are not used in this add-in but required by manifest schema -->
+        <bt:String id="GetStarted.Description" DefaultValue="Your sample add-in loaded successfully. Go to the HOME tab and click the 'Show Taskpane' button to get started." />
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Opens the Excel Data Cleaner task pane to clean and standardize your spreadsheet data." />
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+  <!-- End Add-in Commands Mode integration. -->
+</OfficeApp>

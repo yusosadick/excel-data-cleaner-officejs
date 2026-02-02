@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Excel Data Cleaner</title>
+    
+    <!-- Office.js API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="taskpane.css" />
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Excel Data Cleaner</h1>
+            <p class="subtitle">Clean and standardize your spreadsheet data</p>
+        </header>
+        
+        <main class="main-content">
+            <div class="control-group">
+                <label class="checkbox-label" for="aiToggle">
+                    <input type="checkbox" id="aiToggle" class="checkbox" />
+                    <span class="checkbox-text">Enable AI Insights (Optional)</span>
+                </label>
+                <p class="help-text">Get AI-powered analysis of your data. Requires API key configuration.</p>
+            </div>
+            
+            <button id="cleanButton" class="primary-button">
+                Clean Selected Data
+            </button>
+            
+            <div id="statusMessage" class="status-message" role="status" aria-live="polite"></div>
+        </main>
+        
+        <footer class="footer">
+            <p class="footer-text">Select a range in Excel and click "Clean Selected Data" to begin.</p>
+        </footer>
+    </div>
+    
+    <!-- Application Scripts -->
+    <script type="text/javascript" src="../utils/excelUtils.js"></script>
+    <script type="text/javascript" src="../utils/dataCleaner.js"></script>
+    <script type="text/javascript" src="../utils/aiAnalyzer.js"></script>
+    <script type="text/javascript" src="taskpane.js"></script>
+</body>
+</html>

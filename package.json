@@ -1,0 +1,30 @@
+{
+  "name": "excel-data-cleaner-officejs",
+  "version": "1.0.0",
+  "description": "A professional Excel Office.js Add-in that cleans and standardizes messy spreadsheet data with optional AI-powered analysis",
+  "main": "src/taskpane/taskpane.js",
+  "scripts": {
+    "start": "office-addin-dev-certs install --machine && office-addin-serve start manifest.xml",
+    "stop": "office-addin-serve stop",
+    "validate": "office-addin-manifest validate manifest.xml",
+    "dev": "office-addin-dev-certs install --machine && office-addin-serve start manifest.xml"
+  },
+  "keywords": [
+    "excel",
+    "office-addin",
+    "officejs",
+    "data-cleaning",
+    "spreadsheet"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "office-addin-dev-certs": "^1.11.3",
+    "office-addin-manifest": "^1.12.2",
+    "office-addin-serve": "^1.1.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
